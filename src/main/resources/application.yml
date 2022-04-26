@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/url_gen?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: root
+
+  redis:
+    host: 127.0.0.1
+    port: 6379
+mybatis:
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapper-locations: classpath:mybatis/**/*Mapper.xml
+  # 搜索指定包别名
+  type-aliases-package: cn.imokkk.mapper
+
+server:
+  port: 6324
+
+mybatis.configuration.log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
