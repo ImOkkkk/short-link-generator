@@ -1,12 +1,12 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/url_gen?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+    url: jdbc:mysql://49.234.xx.xxx:3306/url_gen?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
     username: root
-    password: root
+    password: 547717253
 
   redis:
-    host: 127.0.0.1
+    host: 49.234.xx.xxx
     port: 6379
 mybatis:
   # 配置mapper的扫描，找到所有的mapper.xml映射文件
@@ -18,3 +18,15 @@ server:
   port: 6324
 
 mybatis.configuration.log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+kafka:
+  bootstrap-servers: 49.234.xx.xxx:9092
+  producer:
+    acks: all
+    retries: 3
+  consumer:
+    group-id: shortURL_storage
+    max-poll-records: 1000
+
+storage:
+  batch:
+    size: 200

@@ -7,13 +7,13 @@ import cn.imokkkk.exception.CommonException;
 import cn.imokkkk.pojo.Url;
 import cn.imokkkk.util.BloomFilterUtil;
 import cn.imokkkk.util.ShortUrlUtil;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.LongAdder;
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
@@ -37,6 +37,9 @@ public class UrlServiceImpl implements UrlService {
 
   private BlockingQueue<Url> urlQueue;
 
+  @Resource(name = "shortURLSendQueue")
+  private BlockingQueue<String> sendQueue;
+
   @PostConstruct
   public void init() {
     LongAdder longAdder = new LongAdder();
@@ -54,6 +57,12 @@ public class UrlServiceImpl implements UrlService {
                   if (CollUtil.isNotEmpty(urls)) {
                     urlQueue.addAll(urls);
                     longAdder.add(urls.size());
+                  }else {
+                    try {
+                      Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                      e.printStackTrace();
+                    }
                   }
                 }
               }
@@ -107,7 +116,11 @@ public class UrlServiceImpl implements UrlService {
       String shortUrl = ShortUrlUtil.generateShortUrl();
       if (!bloomFilterUtil.containsElement(shortUrl)) {
         bloomFilterUtil.addElement(shortUrl);
-        Urls.insertSelective(Url.builder().surl(shortUrl).createTime(new Date()).build());
+        try {
+          sendQueue.put(shortUrl);
+        } catch (InterruptedException e) {
+          log.error(shortUrl + "_" + e.getMessage());
+        }
       }
     }
   }

@@ -22,6 +22,7 @@
     <mapper.version>4.2.1</mapper.version>
     <caffeine.version>3.0.2</caffeine.version>
     <guava.version>31.0.1-jre</guava.version>
+    <fastJson.version>1.2.79</fastJson.version>
     <commons.validator.version>1.6</commons.validator.version>
   </properties>
 
@@ -38,6 +39,15 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.kafka</groupId>
+      <artifactId>spring-kafka</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>${fastJson.version}</version>
     </dependency>
     <dependency>
       <groupId>tk.mybatis</groupId>
