@@ -59,7 +59,7 @@ public class UrlServiceImpl implements UrlService {
                     longAdder.add(urls.size());
                   }else {
                     try {
-                      Thread.sleep(5000);
+                      Thread.sleep(1000);
                     } catch (InterruptedException e) {
                       e.printStackTrace();
                     }
@@ -79,7 +79,7 @@ public class UrlServiceImpl implements UrlService {
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
-    if (url != null) {
+    if (url != null && url.getLurl() == null) {
       Urls.updateSelectiveByExample(
           Url.builder().lurl(originalURL).build(),
           Example.builder(Url.class)
@@ -87,8 +87,9 @@ public class UrlServiceImpl implements UrlService {
               .build());
       redisTemplate.opsForValue().set(url.getSurl(), originalURL);
       return url.getSurl();
+    } else {
+      return genAndSaveShortUrl(originalURL);
     }
-    return null;
   }
 
   @Override
@@ -102,7 +103,7 @@ public class UrlServiceImpl implements UrlService {
     Url existURL = Urls.getBySUrl(shortURL);
     if (existURL != null) {
       // 添加到Redis
-      redisTemplate.opsForValue().set(shortURL, originalURL);
+      redisTemplate.opsForValue().set(shortURL, existURL.getLurl());
       return existURL.getLurl();
     }
     throw new CommonException(HttpStatus.HTTP_NOT_FOUND, "URL映射不存在！");

@@ -4,6 +4,8 @@ import cn.hutool.core.lang.Validator;
 import cn.imokkkk.request.UrlRequest;
 import cn.imokkkk.response.CommonResponse;
 import cn.imokkkk.service.UrlService;
+import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,7 +45,9 @@ public class UrlController {
   }
 
   @GetMapping("/rec/{shortURL}")
-  public CommonResponse transformURL(@PathVariable(value = "shortURL") String shortURL) {
-    return CommonResponse.successWithData(urlService.transformURL(shortURL));
+  public void transformURL(
+      @PathVariable(value = "shortURL") String shortURL, HttpServletResponse response)
+      throws IOException {
+    response.sendRedirect(urlService.transformURL(shortURL));
   }
 }
