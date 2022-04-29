@@ -17,5 +17,6 @@
 - [ ] 生成游标记录本次已使用到的短URL主键Id
 - [ ] 增加内存缓存caffeine，缓存热点数据
 - [ ] 支持用户自定义短URL
+- [ ] Github Action + Docker自动构建部署
 
 > 参考：https://time.geekbang.org/column/article/488496
