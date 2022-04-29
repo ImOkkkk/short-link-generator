@@ -5,7 +5,7 @@
   <select id="listLimit"
     resultType="cn.imokkkk.pojo.Url">
     SELECT *
-    FROM url LIMIT #{start}, #{limit}
+    FROM url  WHERE ISNULL(lurl)  LIMIT #{start}, #{limit}
   </select>
 
 </mapper>

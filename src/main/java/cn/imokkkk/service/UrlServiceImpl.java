@@ -44,7 +44,7 @@ public class UrlServiceImpl implements UrlService {
   public void init() {
     LongAdder longAdder = new LongAdder();
     urlQueue = new LinkedBlockingQueue<>();
-    List<Url> initUrls = Urls.listLimit(0, 1000);
+    List<Url> initUrls = Urls.listLimit(0, 5000);
     if (CollUtil.isNotEmpty(initUrls)) {
       urlQueue.addAll(initUrls);
       longAdder.add(initUrls.size());
@@ -52,8 +52,8 @@ public class UrlServiceImpl implements UrlService {
     new Thread(
             () -> {
               while (true) {
-                while (urlQueue.size() <= 200) {
-                  List<Url> urls = Urls.listLimit(longAdder.longValue(), 1000);
+                while (urlQueue.size() <= 1000) {
+                  List<Url> urls = Urls.listLimit(longAdder.longValue(), 5000);
                   if (CollUtil.isNotEmpty(urls)) {
                     urlQueue.addAll(urls);
                     longAdder.add(urls.size());
