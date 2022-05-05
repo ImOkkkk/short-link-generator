@@ -54,19 +54,24 @@ public class ShortURLReceiverJob {
         kafkaConsumerConfig.getConsumer(Lists.newArrayList("shortURLTopic"));
     scheduledExecutorService.scheduleAtFixedRate(
         () -> {
-          try {
-            List<String> shortUrls = new ArrayList<>();
-            ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(500));
-            if (CollUtil.isNotEmpty(records)) {
-              for (ConsumerRecord<String, String> record : records) {
-                shortUrls.addAll(JSONArray.parseArray(record.value(), String.class));
-              }
+          List<String> shortUrls = new ArrayList<>();
+          ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(500));
+          if (CollUtil.isNotEmpty(records)) {
+            for (ConsumerRecord<String, String> record : records) {
+              shortUrls.addAll(JSONArray.parseArray(record.value(), String.class));
             }
+          }
+          Thread currentThread = Thread.currentThread();
+          if (currentThread.isInterrupted()) {
+            return;
+          }
+          try {
             if (!shortUrls.isEmpty()) {
               doTask(shortUrls);
             }
-          } catch (Exception e) {
+          } catch (InterruptedException e) {
             log.error("shortURLReceiveJob receive error" + e);
+            currentThread.interrupt();
           }
         },
         10,

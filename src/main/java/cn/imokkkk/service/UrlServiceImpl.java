@@ -57,11 +57,15 @@ public class UrlServiceImpl implements UrlService {
                   if (CollUtil.isNotEmpty(urls)) {
                     urlQueue.addAll(urls);
                     longAdder.add(urls.size());
-                  }else {
+                  } else {
+                    Thread currentThread = Thread.currentThread();
+                    if (currentThread.isInterrupted()) {
+                      break;
+                    }
                     try {
                       Thread.sleep(1000);
                     } catch (InterruptedException e) {
-                      e.printStackTrace();
+                      currentThread.interrupt();
                     }
                   }
                 }

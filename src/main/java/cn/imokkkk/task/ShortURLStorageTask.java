@@ -37,7 +37,7 @@ public class ShortURLStorageTask implements Callable {
   }
 
   @Override
-  public Object call() throws Exception {
+  public Object call(){
     doLoader(shortUrls);
     return shortUrls.size();
   }

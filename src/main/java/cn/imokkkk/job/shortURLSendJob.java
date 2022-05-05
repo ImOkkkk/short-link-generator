@@ -33,18 +33,22 @@ public class shortURLSendJob {
     new Thread(
             () -> {
               while (true) {
+                int size = sendQueue.drainTo(sendList, 100);
+                if (sendList.size() >= 100 || (size == 0 && CollectionUtils.isNotEmpty(sendList))) {
+                  kafkaTemplate.send("shortURLTopic", JSON.toJSONString(sendList));
+                  sendList.clear();
+                }
+                Thread currentThread = Thread.currentThread();
+                if (currentThread.isInterrupted()) {
+                  break;
+                }
                 try {
-                  int size = sendQueue.drainTo(sendList, 100);
-                  if (sendList.size() >= 100
-                      || (size == 0 && CollectionUtils.isNotEmpty(sendList))) {
-                    kafkaTemplate.send("shortURLTopic", JSON.toJSONString(sendList));
-                    sendList.clear();
-                  }
                   if (size == 0) {
                     Thread.sleep(1000);
                   }
-                } catch (Exception e) {
+                } catch (InterruptedException e) {
                   log.error("Send shortURL error!", e);
+                  currentThread.interrupt();
                 }
               }
             })

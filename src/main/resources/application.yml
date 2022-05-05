@@ -22,6 +22,7 @@ spring:
         login-password: admin # druid连接池监控用户名密码
         # 开启监控页面
         enabled: true
+        allow:
       filters: stat,slf4j
   redis:
     host: 49.234.xx.xxx
