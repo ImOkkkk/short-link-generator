@@ -24,7 +24,7 @@ jobs:
           mvn clean package -Dmaven.test.skip=true
       - name: Push Docker
         run: |
-          docker login --username=${{ secrets.ALI_USER }} --password ${{ secrets.ALI_PASSWORD }} registry.cn-shanghai.aliyuncs.com
+          docker login --username=${{ secrets.ALI_USER }} --password ${{ secrets.ALI_PASSWORD }} registry.cn-hangzhou.aliyuncs.com
           docker build . -t ${{ secrets.REGISTRY }}:$GITHUB_RUN_NUMBER
           docker push ${{ secrets.REGISTRY }}:$GITHUB_RUN_NUMBER
           docker tag $(docker images ${{ secrets.REGISTRY }}:$GITHUB_RUN_NUMBER -q) ${{ secrets.REGISTRY }}:latest
