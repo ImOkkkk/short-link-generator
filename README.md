@@ -13,11 +13,12 @@
 ## TODO
 
 - [ ] ~~预生成URL布隆过滤器内容持久化~~
+- [x] 引入Redis布隆过滤器
 - [x] 引入Kafka，预生成URL异步多线程入库
 - [ ] ~~生成游标记录本次已使用到的短URL主键Id~~
 - [ ] 增加内存缓存caffeine，缓存热点数据
 - [ ] 支持用户自定义短URL
-- [ ] Github Action + Docker自动构建部署
+- [x] Github Action + Docker自动构建部署
 
 > 参考：https://time.geekbang.org/column/article/488496
 

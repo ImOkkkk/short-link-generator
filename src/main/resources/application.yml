@@ -49,3 +49,8 @@ kafka:
 storage:
   batch:
     size: 200
+
+redisson:
+  enable: true
+  redis:
+    host: redis://49.234.xx.xxx:6379

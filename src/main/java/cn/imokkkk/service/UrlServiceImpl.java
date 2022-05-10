@@ -15,6 +15,8 @@ import java.util.concurrent.atomic.LongAdder;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.redisson.api.RBloomFilter;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -39,6 +41,9 @@ public class UrlServiceImpl implements UrlService {
 
   @Resource(name = "shortURLSendQueue")
   private BlockingQueue<String> sendQueue;
+
+  @Autowired
+  private RedissonClient redissonClient;
 
   @PostConstruct
   public void init() {
@@ -116,11 +121,15 @@ public class UrlServiceImpl implements UrlService {
   @Override
   @Transactional(rollbackFor = Exception.class)
   public void preGenerateShortURL(long count) {
-    BloomFilterUtil bloomFilterUtil = BloomFilterUtil.getInstance();
+//    BloomFilterUtil bloomFilterUtil = BloomFilterUtil.getInstance();
+    RBloomFilter<Object> bloomFilter = redissonClient.getBloomFilter("URL_BLOOM_FILTER");
+    if (!bloomFilter.isExists()){
+      bloomFilter.tryInit(1000000, 0.00001);
+    }
     for (long i = 0; i < count; i++) {
       String shortUrl = ShortUrlUtil.generateShortUrl();
-      if (!bloomFilterUtil.containsElement(shortUrl)) {
-        bloomFilterUtil.addElement(shortUrl);
+      if (!bloomFilter.contains(shortUrl)) {
+        bloomFilter.add(shortUrl);
         try {
           sendQueue.put(shortUrl);
         } catch (InterruptedException e) {

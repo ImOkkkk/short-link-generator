@@ -1,9 +1,7 @@
 FROM airdock/oraclejdk:1.8
 
-ENV CODE /code
-ENV WORK /code/work
-RUN mkdir -p $CODE \
-    && mkdir -p $WORK
+ENV WORK /data
+RUN mkdir -p $WORK
 
 WORKDIR $WORK
 COPY ./target/*.jar app.jar
