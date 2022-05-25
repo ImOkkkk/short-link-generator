@@ -4,7 +4,7 @@ ENV WORK /data
 RUN mkdir -p $WORK
 
 WORKDIR $WORK
-COPY ./target/*.jar app.jar
+COPY ./short-link-web/target/*.jar app.jar
 
 EXPOSE 6324
 ENTRYPOINT ["java","-jar","app.jar"]
