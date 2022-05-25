@@ -1,0 +1,58 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://49.234.xx.xxx:3306/url_gen?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: 547717253
+    druid:
+      #最大连接池数量
+      maxActive: 50
+      #初始化时建立物理连接的数量
+      initialSize: 1
+      #最小连接池数量
+      minIdle: 1
+      #间隔多久检测需要关闭的空闲连接，毫秒
+      timeBetweenEvictionRunsMillis: 60000
+      #一个空闲连接在连接池中能存活的最小时间，毫秒
+      minEvictableIdleTimeMillis: 300000
+      #检测连接是否有效的sql
+      validationQuery: select 'x'
+      stat-view-servlet:
+        login-username: admin # druid连接池监控用户名
+        login-password: admin # druid连接池监控用户名密码
+        # 开启监控页面
+        enabled: true
+        allow:
+      filters: stat,slf4j
+  redis:
+    host: 49.234.xx.xxx
+    port: 6379
+    password: xxx
+mybatis:
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapper-locations: classpath:mybatis/**/*Mapper.xml
+  # 搜索指定包别名
+  type-aliases-package: cn.imokkk.mapper
+
+server:
+  port: 6324
+
+#mybatis.configuration.log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+kafka:
+  bootstrap-servers: 49.234.xx.xxx:9092
+  producer:
+    acks: all
+    retries: 3
+  consumer:
+    group-id: shortURL_storage
+    max-poll-records: 1000
+
+storage:
+  batch:
+    size: 200
+
+redisson:
+  enable: true
+  redis:
+    host: redis://49.234.xx.xxx:6379
+    password: xxx
