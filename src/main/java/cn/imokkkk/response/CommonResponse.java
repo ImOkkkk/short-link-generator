@@ -20,10 +20,11 @@ public class CommonResponse<T> {
 
   private String msg;
 
+  private Integer errorCode;
+
   private T data;
 
-  public CommonResponse() {
-  }
+  public CommonResponse() {}
 
   public CommonResponse(boolean success) {
     this.success = success;
@@ -31,6 +32,12 @@ public class CommonResponse<T> {
 
   public CommonResponse(boolean success, String msg) {
     this.success = success;
+    this.msg = msg;
+  }
+
+  public CommonResponse(boolean success, int errorCode, String msg) {
+    this.success = success;
+    this.errorCode = errorCode;
     this.msg = msg;
   }
 
@@ -57,5 +64,9 @@ public class CommonResponse<T> {
 
   public static <T> CommonResponse<T> failWithMsg(String msg) {
     return new CommonResponse<>(false, msg);
+  }
+
+  public static <T> CommonResponse<T> failWithCodeMsg(int errorCode, String msg) {
+    return new CommonResponse<>(false, errorCode, msg);
   }
 }

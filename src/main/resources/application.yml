@@ -6,7 +6,7 @@ spring:
     password: 547717253
     druid:
       #最大连接池数量
-      maxActive: 200
+      maxActive: 50
       #初始化时建立物理连接的数量
       initialSize: 1
       #最小连接池数量
@@ -27,6 +27,7 @@ spring:
   redis:
     host: 49.234.xx.xxx
     port: 6379
+    password: xxx
 mybatis:
   # 配置mapper的扫描，找到所有的mapper.xml映射文件
   mapper-locations: classpath:mybatis/**/*Mapper.xml
@@ -54,3 +55,4 @@ redisson:
   enable: true
   redis:
     host: redis://49.234.xx.xxx:6379
+    password: xxx

@@ -1,6 +1,8 @@
 package cn.imokkkk.controller;
 
 import cn.hutool.core.lang.Validator;
+import cn.imokkkk.annotaion.RateLimiter;
+import cn.imokkkk.constant.LimitType;
 import cn.imokkkk.request.UrlRequest;
 import cn.imokkkk.response.CommonResponse;
 import cn.imokkkk.service.UrlService;
@@ -37,6 +39,7 @@ public class UrlController {
   }
 
   @PostMapping("/gen")
+  @RateLimiter(time = 1, count = 1000, limitType = LimitType.GLOBAL)
   public CommonResponse generateShortURL(@RequestBody UrlRequest urlRequest) {
     Validator.validateUrl(
         urlRequest.getOriginalURL(), String.format("URL: [%s]非法", urlRequest.getOriginalURL()));
@@ -45,6 +48,7 @@ public class UrlController {
   }
 
   @GetMapping("/rec/{shortURL}")
+  @RateLimiter(time = 1, count = 1000, limitType = LimitType.GLOBAL)
   public void transformURL(
       @PathVariable(value = "shortURL") String shortURL, HttpServletResponse response)
       throws IOException {
