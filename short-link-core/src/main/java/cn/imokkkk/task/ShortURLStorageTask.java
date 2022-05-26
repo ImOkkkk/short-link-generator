@@ -70,7 +70,7 @@ public class ShortURLStorageTask implements Callable {
         UrlMapper urlMapper = sqlSession.getMapper(UrlMapper.class);
         shortUrlList.forEach(
             e -> {
-              urlMapper.insertSelective(Url.builder().surl(e).createTime(new Date()).build());
+              urlMapper.insertOnDuplicateKeyUpdate(Url.builder().surl(e).createTime(new Date()).build());
             });
         sqlSession.getConnection().commit();
       } catch (Exception e) {

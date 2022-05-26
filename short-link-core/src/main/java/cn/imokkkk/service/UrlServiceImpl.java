@@ -124,7 +124,7 @@ public class UrlServiceImpl implements UrlService {
 //    BloomFilterUtil bloomFilterUtil = BloomFilterUtil.getInstance();
     RBloomFilter<Object> bloomFilter = redissonClient.getBloomFilter("URL_BLOOM_FILTER");
     if (!bloomFilter.isExists()){
-      bloomFilter.tryInit(1000000, 0.00001);
+      bloomFilter.tryInit(20000000, 0.00001);
     }
     for (long i = 0; i < count; i++) {
       String shortUrl = ShortUrlUtil.generateShortUrl();

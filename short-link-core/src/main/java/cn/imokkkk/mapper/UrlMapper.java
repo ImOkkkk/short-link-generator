@@ -15,4 +15,10 @@ import tk.mybatis.mapper.common.Mapper;
 public interface UrlMapper extends Mapper<Url> {
 
   List<Url> listLimit(@Param("start") long start, @Param("limit") long count);
+
+  /**
+   * 插入数据(如果存在主键/索引唯一冲突，更新数据)
+   * @param url
+   */
+  void insertOnDuplicateKeyUpdate(@Param("url")Url url);
 }
