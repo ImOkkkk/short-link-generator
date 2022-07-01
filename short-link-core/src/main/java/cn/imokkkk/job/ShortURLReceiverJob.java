@@ -69,7 +69,7 @@ public class ShortURLReceiverJob {
             if (!shortUrls.isEmpty()) {
               doTask(shortUrls);
             }else {
-              Thread.sleep(1000);
+              currentThread.sleep(1000);
             }
           } catch (InterruptedException e) {
             log.error("shortURLReceiveJob receive error" + e);

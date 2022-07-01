@@ -44,7 +44,7 @@ public class shortURLSendJob {
                 }
                 try {
                   if (size == 0) {
-                    Thread.sleep(1000);
+                    currentThread.sleep(1000);
                   }
                 } catch (InterruptedException e) {
                   log.error("Send shortURL error!", e);

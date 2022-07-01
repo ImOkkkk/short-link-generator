@@ -68,7 +68,7 @@ public class UrlServiceImpl implements UrlService {
                       break;
                     }
                     try {
-                      Thread.sleep(1000);
+                      currentThread.sleep(1000);
                     } catch (InterruptedException e) {
                       currentThread.interrupt();
                     }
