@@ -5,11 +5,13 @@ import cn.hutool.http.HttpStatus;
 import cn.imokkkk.domain.Urls;
 import cn.imokkkk.exception.CommonException;
 import cn.imokkkk.pojo.Url;
-import cn.imokkkk.util.BloomFilterUtil;
 import cn.imokkkk.util.ShortUrlUtil;
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.LongAdder;
 import javax.annotation.PostConstruct;
@@ -45,6 +47,9 @@ public class UrlServiceImpl implements UrlService {
   @Autowired
   private RedissonClient redissonClient;
 
+  protected ScheduledExecutorService scheduledService = Executors.newScheduledThreadPool(1,
+      new ThreadFactoryBuilder().setNameFormat("定时拉取队列-%d").build());
+
   @PostConstruct
   public void init() {
     LongAdder longAdder = new LongAdder();
@@ -54,29 +59,19 @@ public class UrlServiceImpl implements UrlService {
       urlQueue.addAll(initUrls);
       longAdder.add(initUrls.size());
     }
-    new Thread(
-            () -> {
-              while (true) {
-                while (urlQueue.size() <= 1000) {
-                  List<Url> urls = Urls.listLimit(longAdder.longValue(), 5000);
-                  if (CollUtil.isNotEmpty(urls)) {
-                    urlQueue.addAll(urls);
-                    longAdder.add(urls.size());
-                  } else {
-                    Thread currentThread = Thread.currentThread();
-                    if (currentThread.isInterrupted()) {
-                      break;
-                    }
-                    try {
-                      currentThread.sleep(1000);
-                    } catch (InterruptedException e) {
-                      currentThread.interrupt();
-                    }
-                  }
-                }
-              }
-            })
-        .start();
+    scheduledService.scheduleAtFixedRate(
+        () -> {
+          while (urlQueue.size() <= 1000) {
+            List<Url> urls = Urls.listLimit(longAdder.longValue(), 5000);
+            if (CollUtil.isNotEmpty(urls)) {
+              urlQueue.addAll(urls);
+              longAdder.add(urls.size());
+            }
+          }
+        },
+        10,
+        1000,
+        TimeUnit.MILLISECONDS);
   }
 
   @Override
