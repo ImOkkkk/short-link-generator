@@ -1,0 +1,5 @@
+org.springframework.boot.env.EnvironmentPostProcessor=\
+cn.imokkkk.env.DatabaseEnvironmentPostProcessor
+org.springframework.context.ApplicationListener=\
+cn.imokkkk.env.support.PropertySourcesDatabaseHelper,\
+cn.imokkkk.env.support.Resources

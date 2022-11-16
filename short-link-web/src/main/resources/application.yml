@@ -39,7 +39,7 @@ server:
 
 #mybatis.configuration.log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 kafka:
-  bootstrap-servers: 49.234.xx.xxx:9092
+ # bootstrap-servers: 49.234.xx.xxx:9092
   producer:
     acks: all
     retries: 3
