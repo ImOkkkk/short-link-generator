@@ -137,6 +137,7 @@ public class ShortURLReceiverJob {
               shortUrls.size(),
               stopWatch.getTotalTimeMillis());
         } catch (Exception e) {
+          log.error("storage shortURL to DB error : {}", e.getMessage(), e);
           sqlSession.rollback();
         } finally {
           if (sqlSession != null) {
