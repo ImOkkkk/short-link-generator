@@ -12,7 +12,7 @@
     parameterType="cn.imokkkk.pojo.Url" keyProperty="id" useGeneratedKeys="true">
     INSERT INTO url (surl, create_time)
     VALUES (#{url.surl}, #{url.createTime}) ON DUPLICATE KEY
-    UPDATE create_time = #{url.createTime};
+    UPDATE create_time = VALUES (create_time);
   </insert>
 
 </mapper>

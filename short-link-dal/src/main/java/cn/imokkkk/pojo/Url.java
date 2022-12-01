@@ -1,6 +1,7 @@
 package cn.imokkkk.pojo;
 
 import java.util.Date;
+import javax.persistence.Id;
 import lombok.Builder;
 import lombok.Data;
 
@@ -13,6 +14,7 @@ import lombok.Data;
 @Builder
 public class Url {
 
+  @Id
   private Long id;
   private String surl;//短链接
   private String lurl;//长链接
