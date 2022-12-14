@@ -25,7 +25,7 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <redisson.version>3.11.5</redisson.version>
-    <hutool.version>5.6.1</hutool.version>
+    <hutool.version>5.7.20</hutool.version>
     <mapper.version>4.2.1</mapper.version>
     <caffeine.version>3.0.2</caffeine.version>
     <guava.version>31.0.1-jre</guava.version>
@@ -33,6 +33,7 @@
     <druid.version>1.2.8</druid.version>
     <commons.validator.version>1.6</commons.validator.version>
     <jasypt.version>3.0.4</jasypt.version>
+    <sharding-jdbc.version>4.1.1</sharding-jdbc.version>
   </properties>
 
   <dependencies>
@@ -57,11 +58,6 @@
       <groupId>com.alibaba</groupId>
       <artifactId>fastjson</artifactId>
       <version>${fastJson.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.alibaba</groupId>
-      <artifactId>druid-spring-boot-starter</artifactId>
-      <version>${druid.version}</version>
     </dependency>
     <dependency>
       <groupId>tk.mybatis</groupId>
@@ -114,6 +110,17 @@
         <groupId>com.github.ulisesbocchio</groupId>
         <artifactId>jasypt-spring-boot-starter</artifactId>
         <version>${jasypt.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.shardingsphere</groupId>
+        <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
+        <version>${sharding-jdbc.version}</version>
+      </dependency>
+<!--      必须搭配druid，不能使用druid-spring-boot-starter-->
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>druid</artifactId>
+        <version>${druid.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

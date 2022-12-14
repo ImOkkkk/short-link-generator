@@ -1,6 +1,7 @@
 package cn.imokkkk.job;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.lang.id.NanoId;
 import cn.imokkkk.config.KafkaConsumerConfig;
 import cn.imokkkk.mapper.UrlMapper;
 import cn.imokkkk.pojo.Url;
@@ -128,7 +129,11 @@ public class ShortURLReceiverJob {
           shortUrls.forEach(
               e -> {
                 urlMapper.insertOnDuplicateKeyUpdate(
-                    Url.builder().surl(e).createTime(new Date()).build());
+                    Url.builder()
+                        .sid(NanoId.randomNanoId())
+                        .surl(e)
+                        .createTime(new Date())
+                        .build());
               });
           sqlSession.getConnection().commit();
           stopWatch.stop();

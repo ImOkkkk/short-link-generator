@@ -1,9 +1,7 @@
 spring:
+  main:
+    allow-bean-definition-overriding: true
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://49.234.xx.xxx:3306/url_gen?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
-    username: root
-    password: ENC(xPowsGGk7qtWdvCvCtChLOVLXPAyMPOrrZWKSmN5mwyKIzgAwBxNx4uxcJ+9Ksbn)
     druid:
       #最大连接池数量
       maxActive: 50
@@ -28,6 +26,37 @@ spring:
     host: 49.234.xx.xxx
     port: 6379
     password: ENC(xPowsGGk7qtWdvCvCtChLOVLXPAyMPOrrZWKSmN5mwyKIzgAwBxNx4uxcJ+9Ksbn)
+  shardingsphere:
+    datasource:
+      ds0:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://49.234.xx.xxx:3306/url_gen?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+        username: root
+        password: ENC(xPowsGGk7qtWdvCvCtChLOVLXPAyMPOrrZWKSmN5mwyKIzgAwBxNx4uxcJ+9Ksbn)
+      ds1:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://49.234.xx.xxx:3306/url_gen1?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+        username: root
+        password: ENC(xPowsGGk7qtWdvCvCtChLOVLXPAyMPOrrZWKSmN5mwyKIzgAwBxNx4uxcJ+9Ksbn)
+      names: ds0, ds1
+    sharding:
+      default-database-strategy:
+        inline:
+          sharding-column: sid
+          algorithm-expression: ds$->{Math.abs(sid.hashCode())%2}
+      tables:
+        url:
+          actual-data-nodes: ds$->{0..1}.url$->{0..1}
+          table-strategy:
+            inline:
+              sharding-column: surl
+              algorithm-expression: url$->{Math.abs(surl.hashCode())%2}
+    props:
+      sql:
+        show: false
+
 mybatis:
   # 配置mapper的扫描，找到所有的mapper.xml映射文件
   mapper-locations: classpath:mybatis/**/*Mapper.xml
@@ -39,7 +68,7 @@ server:
 
 #mybatis.configuration.log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 kafka:
- # bootstrap-servers: 49.234.xx.xxx:9092
+  bootstrap-servers: 49.234.xx.xxx:9092
   producer:
     acks: all
     retries: 3

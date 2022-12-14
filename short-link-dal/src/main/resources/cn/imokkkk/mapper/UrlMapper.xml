@@ -4,14 +4,16 @@
 <mapper namespace="cn.imokkkk.mapper.UrlMapper">
   <select id="listLimit"
     resultType="cn.imokkkk.pojo.Url">
-    SELECT *
-    FROM url  WHERE ISNULL(lurl)  LIMIT #{start}, #{limit}
+    SELECT `id` as id, `surl` as surl, `lurl` as lurl, `sid` as sid, `create_time` as createTime
+    FROM url
+    WHERE ISNULL(lurl) LIMIT #{start}
+        , #{limit}
   </select>
 
   <insert id="insertOnDuplicateKeyUpdate"
     parameterType="cn.imokkkk.pojo.Url" keyProperty="id" useGeneratedKeys="true">
-    INSERT INTO url (surl, create_time)
-    VALUES (#{url.surl}, #{url.createTime}) ON DUPLICATE KEY
+    INSERT INTO url (surl, sid, create_time)
+    VALUES (#{url.surl}, #{url.sid}, #{url.createTime}) ON DUPLICATE KEY
     UPDATE create_time = VALUES (create_time);
   </insert>
 

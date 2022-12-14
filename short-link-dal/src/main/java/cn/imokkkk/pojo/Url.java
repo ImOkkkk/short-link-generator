@@ -16,6 +16,7 @@ public class Url {
 
   @Id
   private Long id;
+  private String sid;//uuid
   private String surl;//短链接
   private String lurl;//长链接
   private Date createTime;//创建时间
