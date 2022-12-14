@@ -19,6 +19,7 @@
 - [ ] 增加内存缓存caffeine，缓存热点数据
 - [ ] 支持用户自定义短URL
 - [x] Github Action + Docker自动构建部署
+- [ ] 分库分表 (笔记：https://imokkkk.github.io/fenkufenbiaon/)
 
 > 参考：https://time.geekbang.org/column/article/488496
 
