@@ -1,6 +1,7 @@
 package cn.imokkkk.task;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.lang.id.NanoId;
 import cn.imokkkk.mapper.UrlMapper;
 import cn.imokkkk.pojo.Url;
 import com.alibaba.fastjson.JSON;
@@ -70,7 +71,8 @@ public class ShortURLStorageTask implements Callable {
         UrlMapper urlMapper = sqlSession.getMapper(UrlMapper.class);
         shortUrlList.forEach(
             e -> {
-              urlMapper.insertOnDuplicateKeyUpdate(Url.builder().surl(e).createTime(new Date()).build());
+              urlMapper.insertOnDuplicateKeyUpdate(
+                  Url.builder().sid(NanoId.randomNanoId()).surl(e).createTime(new Date()).build());
             });
         sqlSession.getConnection().commit();
       } catch (Exception e) {

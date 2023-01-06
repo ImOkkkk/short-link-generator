@@ -4,6 +4,7 @@ import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -20,7 +21,7 @@ import org.springframework.context.annotation.Configuration;
 public class ThreadConfig {
   @Bean
   public BlockingQueue<String> shortURLSendQueue() {
-    return new ArrayBlockingQueue<String>(20000);
+    return new LinkedBlockingQueue<>(20000);
   }
 
   @Bean(destroyMethod = "shutdown", name = "shortURLSaveThreadPool")
