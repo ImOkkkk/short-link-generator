@@ -27,7 +27,7 @@
     <redisson.version>3.11.5</redisson.version>
     <hutool.version>5.7.20</hutool.version>
     <mapper.version>4.2.2</mapper.version>
-    <caffeine.version>3.0.2</caffeine.version>
+    <caffeine.version>3.1.5</caffeine.version>
     <guava.version>31.1-jre</guava.version>
     <fastJson.version>1.2.83</fastJson.version>
     <druid.version>1.2.8</druid.version>
