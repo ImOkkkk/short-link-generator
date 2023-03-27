@@ -32,7 +32,7 @@
     <fastJson.version>1.2.83</fastJson.version>
     <druid.version>1.2.8</druid.version>
     <commons.validator.version>1.7</commons.validator.version>
-    <jasypt.version>3.0.4</jasypt.version>
+    <jasypt.version>3.0.5</jasypt.version>
   </properties>
 
   <dependencies>
