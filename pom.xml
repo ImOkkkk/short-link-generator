@@ -29,7 +29,7 @@
     <mapper.version>4.2.2</mapper.version>
     <caffeine.version>3.0.2</caffeine.version>
     <guava.version>31.1-jre</guava.version>
-    <fastJson.version>1.2.83</fastJson.version>
+    <fastJson.version>2.0.28</fastJson.version>
     <druid.version>1.2.8</druid.version>
     <commons.validator.version>1.7</commons.validator.version>
     <jasypt.version>3.0.4</jasypt.version>
