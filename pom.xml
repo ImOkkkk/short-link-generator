@@ -28,7 +28,7 @@
     <hutool.version>5.7.20</hutool.version>
     <mapper.version>4.2.2</mapper.version>
     <caffeine.version>3.0.2</caffeine.version>
-    <guava.version>31.1-jre</guava.version>
+    <guava.version>32.0.0-jre</guava.version>
     <fastJson.version>1.2.83</fastJson.version>
     <druid.version>1.2.8</druid.version>
     <commons.validator.version>1.7</commons.validator.version>
