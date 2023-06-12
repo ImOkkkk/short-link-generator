@@ -1,4 +1,4 @@
-package cn.imokkkk;
+package cn.imokkkk.util;
 
 import cn.imokkkk.util.ShortUrlUtil;
 import com.google.common.collect.Sets;
