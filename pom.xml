@@ -24,14 +24,14 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <redisson.version>3.11.5</redisson.version>
+    <redisson.version>3.22.0</redisson.version>
     <hutool.version>5.7.20</hutool.version>
-    <mapper.version>4.2.1</mapper.version>
+    <mapper.version>4.2.3</mapper.version>
     <caffeine.version>3.0.2</caffeine.version>
-    <guava.version>31.0.1-jre</guava.version>
+    <guava.version>32.0.0-jre</guava.version>
     <fastJson.version>1.2.83</fastJson.version>
     <druid.version>1.2.8</druid.version>
-    <commons.validator.version>1.6</commons.validator.version>
+    <commons.validator.version>1.7</commons.validator.version>
     <jasypt.version>3.0.4</jasypt.version>
   </properties>
 
