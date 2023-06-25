@@ -24,11 +24,15 @@ public class RedissonConfigConfig {
   @Value("${redisson.redis.password:}")
   private String password;
 
+  @Value("${redisson.redis.database:}")
+  private int database;
+
   @Bean
   public Config redissonConfig() {
     Config config = new Config();
     SingleServerConfig singleServerConfig = config.useSingleServer();
     singleServerConfig.setAddress(address);
+    singleServerConfig.setDatabase(database);
     if (StrUtil.isNotBlank(password)) {
       singleServerConfig.setPassword(password);
     }

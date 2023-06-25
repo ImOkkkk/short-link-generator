@@ -1,7 +1,10 @@
 spring:
+  main:
+    allow-bean-definition-overriding: true
+    web-application-type: reactive
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://49.234.xx.xxx:3306/url_gen?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+    url: jdbc:mysql://rm-cn-wwo38outy0003n6o.rwlb.rds.aliyuncs.com:3306/url_gen?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
     username: root
     password: ENC(xPowsGGk7qtWdvCvCtChLOVLXPAyMPOrrZWKSmN5mwyKIzgAwBxNx4uxcJ+9Ksbn)
     druid:
@@ -39,7 +42,7 @@ server:
 
 #mybatis.configuration.log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 kafka:
- # bootstrap-servers: 49.234.xx.xxx:9092
+  bootstrap-servers: 127.0.0.1:9092
   producer:
     acks: all
     retries: 3
@@ -56,6 +59,7 @@ redisson:
   redis:
     host: redis://49.234.xx.xxx:6379
     password: ENC(xPowsGGk7qtWdvCvCtChLOVLXPAyMPOrrZWKSmN5mwyKIzgAwBxNx4uxcJ+9Ksbn)
+    database: 11
     #mvn jasypt:encrypt-value "-Djasypt.encryptor.password=盐" "-Djasypt.plugin.value=密码"
 
 jasypt:

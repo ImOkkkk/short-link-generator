@@ -9,8 +9,9 @@ CREATE TABLE `app_config`
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 
-CREATE TABLE `url`  (
+CREATE TABLE `url0`  (
                         `id` bigint(20) NOT NULL AUTO_INCREMENT,
+                        `sid` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
                         `surl` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
                         `lurl` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
                         `create_time` datetime NULL DEFAULT NULL,
