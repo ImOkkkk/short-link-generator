@@ -56,6 +56,7 @@ redisson:
   redis:
     host: redis://49.234.xx.xxx:6379
     password: ENC(xPowsGGk7qtWdvCvCtChLOVLXPAyMPOrrZWKSmN5mwyKIzgAwBxNx4uxcJ+9Ksbn)
+    database: 11
     #mvn jasypt:encrypt-value "-Djasypt.encryptor.password=盐" "-Djasypt.plugin.value=密码"
 
 jasypt:

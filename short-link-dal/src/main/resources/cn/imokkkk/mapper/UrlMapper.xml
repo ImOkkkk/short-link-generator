@@ -4,7 +4,11 @@
 <mapper namespace="cn.imokkkk.mapper.UrlMapper">
   <select id="listLimit"
     resultType="cn.imokkkk.pojo.Url">
-    SELECT `id` as id, `surl` as surl, `lurl` as lurl, `sid` as sid, `create_time` as createTime
+    SELECT `id`          as id,
+           `sid`         as sid,
+           `surl`        as surl,
+           `lurl`        as lurl,
+           `create_time` as createTime
     FROM url0
     WHERE ISNULL(lurl) LIMIT #{start}
         , #{limit}
