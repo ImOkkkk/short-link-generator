@@ -6,7 +6,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://rm-cn-wwo38outy0003n6o.rwlb.rds.aliyuncs.com:3306/url_gen?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
     username: root
-    password: ENC(xPowsGGk7qtWdvCvCtChLOVLXPAyMPOrrZWKSmN5mwyKIzgAwBxNx4uxcJ+9Ksbn)
+    password: ENC(hZ0fsuS53dhB4OUpr5YtrkDr4oTgsKOkENsl4+dy2vwZbXAWbe/RKX5TJlqyHGeJ)
     druid:
       #最大连接池数量
       maxActive: 50
@@ -28,9 +28,9 @@ spring:
         allow:
       filters: stat,slf4j
   redis:
-    host: 49.234.xx.xxx
+    host: 192.168.0.85
     port: 6379
-    password: ENC(xPowsGGk7qtWdvCvCtChLOVLXPAyMPOrrZWKSmN5mwyKIzgAwBxNx4uxcJ+9Ksbn)
+    password: ENC(n93ASP+yjweqJ6F3hN5iycbH9KHuc3+2zwDQuaQ/1XdjWYZL2EWQa1nOE1ILxCsG)
 mybatis:
   # 配置mapper的扫描，找到所有的mapper.xml映射文件
   mapper-locations: classpath:mybatis/**/*Mapper.xml
@@ -57,11 +57,16 @@ storage:
 redisson:
   enable: true
   redis:
-    host: redis://49.234.xx.xxx:6379
-    password: ENC(xPowsGGk7qtWdvCvCtChLOVLXPAyMPOrrZWKSmN5mwyKIzgAwBxNx4uxcJ+9Ksbn)
+    host: redis://192.168.0.85:6379
+    password: ENC(n93ASP+yjweqJ6F3hN5iycbH9KHuc3+2zwDQuaQ/1XdjWYZL2EWQa1nOE1ILxCsG)
     database: 11
     #mvn jasypt:encrypt-value "-Djasypt.encryptor.password=盐" "-Djasypt.plugin.value=密码"
 
 jasypt:
   encryptor:
     password=${JASYPT_ENCRYPTOR_PASSWORD:}
+resilience4j:
+  circuitbreaker:
+    backends:
+      CircuitBreaker-resourceCircuitBreakerFilter:
+        max-wait-duration-in-half-open-state: PT5s

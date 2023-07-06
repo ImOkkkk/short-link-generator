@@ -1,4 +1,4 @@
-package cn.imokkkk.filter;
+package cn.imokkkk.resilience4j;
 
 import io.github.resilience4j.bulkhead.Bulkhead;
 import io.github.resilience4j.bulkhead.BulkheadConfig;
