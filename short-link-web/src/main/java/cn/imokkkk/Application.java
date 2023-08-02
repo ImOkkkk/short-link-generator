@@ -1,7 +1,12 @@
 package cn.imokkkk;
 
+import cn.imokkkk.redis.EnableRedisIntercepting;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.reactive.config.DelegatingWebFluxConfiguration;
+import org.springframework.web.reactive.config.EnableWebFlux;
+
 import tk.mybatis.spring.annotation.MapperScan;
 
 /**
@@ -11,6 +16,8 @@ import tk.mybatis.spring.annotation.MapperScan;
  */
 @SpringBootApplication
 @MapperScan(basePackages = "cn.imokkkk.mapper")
+@EnableRedisIntercepting
+@EnableWebFlux
 public class Application {
   public static void main(String[] args) {
     SpringApplication.run(Application.class);

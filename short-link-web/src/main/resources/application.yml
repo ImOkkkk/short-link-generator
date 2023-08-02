@@ -1,4 +1,7 @@
 spring:
+  cloud:
+    config:
+      enabled: false
   main:
     allow-bean-definition-overriding: true
     web-application-type: reactive
@@ -6,7 +9,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://rm-cn-wwo38outy0003n6o.rwlb.rds.aliyuncs.com:3306/url_gen?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
     username: root
-    password: ENC(hZ0fsuS53dhB4OUpr5YtrkDr4oTgsKOkENsl4+dy2vwZbXAWbe/RKX5TJlqyHGeJ)
+    password: ENC(I51BPJ7ylFwCHTwDqTfWK4F/+WcZPn7WaA/eSSdkw+GeABV1yKgj9oXVLHv2j0iF)
     druid:
       #最大连接池数量
       maxActive: 50
@@ -42,7 +45,7 @@ server:
 
 #mybatis.configuration.log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 kafka:
-  bootstrap-servers: 127.0.0.1:9092
+  bootstrap-servers: ENC(Uci6mAkRJiXuCWzP+BxB01hIVUhvnrdjiBTnYX4Sv8Y7I0inVsekoU68A9syjB6AdCpY0ss9OGv75CyvJWdDnQ==)
   producer:
     acks: all
     retries: 3
@@ -70,3 +73,12 @@ resilience4j:
     backends:
       CircuitBreaker-resourceCircuitBreakerFilter:
         max-wait-duration-in-half-open-state: PT5s
+
+# 启用Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+    metrics:
+      enabled: true
