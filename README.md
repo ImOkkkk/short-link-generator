@@ -20,6 +20,11 @@
 - [ ] 支持用户自定义短URL
 - [x] Github Action + Docker自动构建部署
 - [x] 分库分表 (笔记：https://imokkkk.github.io/fenkufenbiaon/)
+- [x] WebFlux整合Resilience4j实现并发控制(resilience4j分支)
+- [x] SpringCloud Config实现动态更新Resilience4j配置(resilience4j分支)
+- [x] Redis Spring API监控指标注册到MeterRegistry
+
+  
 
 > 参考：https://time.geekbang.org/column/article/488496
 
