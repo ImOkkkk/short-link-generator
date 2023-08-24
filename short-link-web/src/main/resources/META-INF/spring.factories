@@ -4,4 +4,5 @@ org.springframework.context.ApplicationListener=\
 cn.imokkkk.env.support.PropertySourcesDatabaseHelper,\
 cn.imokkkk.env.support.Resources
 cn.imokkkk.redis.EnableRedisIntercepting=\
-cn.imokkkk.redis.RedisSetCounterMetrics
+cn.imokkkk.redis.RedisSetCounterMetrics,\
+cn.imokkkk.redis.RedisSetTimerMetrics

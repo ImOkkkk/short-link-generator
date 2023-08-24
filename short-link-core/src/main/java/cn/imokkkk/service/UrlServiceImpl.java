@@ -37,6 +37,8 @@ import tk.mybatis.mapper.weekend.WeekendSqls;
 @DependsOn("urls")
 public class UrlServiceImpl implements UrlService {
 
+  private static final String KEY_FORMAT = "short_url:%s";
+
   @Autowired private StringRedisTemplate redisTemplate;
 
   private BlockingQueue<Url> urlQueue;
@@ -89,7 +91,7 @@ public class UrlServiceImpl implements UrlService {
           Example.builder(Url.class)
               .where(WeekendSqls.<Url>custom().andEqualTo(Url::getId, url.getId()))
               .build());
-      redisTemplate.opsForValue().set(url.getSurl(), originalURL);
+      redisTemplate.opsForValue().set(String.format(KEY_FORMAT, url.getSurl()), originalURL, 2, TimeUnit.HOURS);
       return url.getSurl();
     } else {
       return genAndSaveShortUrl(originalURL);
@@ -99,7 +101,7 @@ public class UrlServiceImpl implements UrlService {
   @Override
   public String transformURL(String shortURL) {
     // 查找Redis中是否有缓存
-    String originalURL = redisTemplate.opsForValue().get(shortURL);
+    String originalURL = redisTemplate.opsForValue().get(String.format(KEY_FORMAT, shortURL));
     if (originalURL != null) {
       return originalURL;
     }

@@ -30,9 +30,7 @@ public class RedisSetCounterMetrics extends AbstractRedisMetrics<Counter> {
         /**
          * @see RedisStringCommands#set(byte[], byte[])
          */
-        return RedisStringCommands.class.equals(declaringClass)
-                && "set".equals(methodName)
-                && method.getParameterCount() == 2;
+        return RedisStringCommands.class.equals(declaringClass) && methodName.startsWith("set");
     }
 
     @Override
