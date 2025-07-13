@@ -2,6 +2,8 @@ package cn.imokkkk.request;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * @author ImOkkkk
  * @date 2022/4/22 9:58
@@ -9,5 +11,6 @@ import lombok.Data;
  */
 @Data
 public class UrlRequest {
-  private String originalURL;
+    @NotBlank(message = "原始链接不能为空")
+    private String originalURL;
 }

@@ -6,6 +6,7 @@ import cn.imokkkk.constant.LimitType;
 import cn.imokkkk.request.UrlRequest;
 import cn.imokkkk.response.CommonResponse;
 import cn.imokkkk.service.UrlService;
+import cn.imokkkk.util.facade.Facade;
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,7 @@ public class UrlController {
 
   @PostMapping("/gen")
   @RateLimiter(time = 1, count = 1000, limitType = LimitType.GLOBAL)
+  @Facade
   public CommonResponse generateShortURL(@RequestBody UrlRequest urlRequest) {
     Validator.validateUrl(
         urlRequest.getOriginalURL(), String.format("URL: [%s]非法", urlRequest.getOriginalURL()));
