@@ -15,5 +15,19 @@
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
   </properties>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>21</source>
+          <target>21</target>
+          <!-- Add release flag for better compatibility -->
+          <release>21</release>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>
