@@ -23,8 +23,11 @@
         <configuration>
           <source>21</source>
           <target>21</target>
-          <!-- Add release flag for better compatibility -->
-          <release>21</release>
+          <fork>true</fork>
+          <compilerArgs>
+            <!-- 把包打开给所有无名模块 -->
+            <arg>--add-opens=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED</arg>
+          </compilerArgs>
         </configuration>
       </plugin>
     </plugins>
