@@ -5,6 +5,7 @@ import cn.hutool.http.HttpStatus;
 import cn.imokkkk.domain.Urls;
 import cn.imokkkk.exception.CommonException;
 import cn.imokkkk.pojo.Url;
+import cn.imokkkk.util.DistributeLock;
 import cn.imokkkk.util.ShortUrlUtil;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import java.util.List;
@@ -76,6 +77,7 @@ public class UrlServiceImpl implements UrlService {
 
   @Override
   @Transactional(rollbackFor = Exception.class)
+  @DistributeLock(keyExpression = "#originalURL", scene = "genAndSaveShortUrl")
   public String genAndSaveShortUrl(String originalURL) {
     Url url = null;
     try {

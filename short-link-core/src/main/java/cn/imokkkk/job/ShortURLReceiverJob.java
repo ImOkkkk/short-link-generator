@@ -81,15 +81,8 @@ public class ShortURLReceiverJob {
           }
           try {
             if (!shortUrls.isEmpty()) {
-              //Guava EventBus实现
-              if (eventBus == null) {
-                eventBus = new AsyncEventBus(shortURLSaveThreadPool);
-                this.eventBus.register(new StorageEventListener());
-              }
-              List<List<String>> shortURLLists = Lists.partition(shortUrls, batchSize);
-              shortURLLists.forEach(s -> eventBus.post(s));
-              //doTask(shortUrls);
-            } else {
+              doTask(shortUrls);
+            }else {
               currentThread.sleep(1000);
             }
           } catch (InterruptedException e) {
