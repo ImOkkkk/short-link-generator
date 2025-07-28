@@ -13,11 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Set up JDK 11
-        # 这里使用java11的环境, 其他项目在github action中找到对应的语言环境就行
+      - name: Set up JDK 21
+        # 这里使用java21的环境, 其他项目在github action中找到对应的语言环境就行
         uses: actions/setup-java@v1
         with:
-          java-version: 11
+          java-version: 21
       - name: Build with Maven
         # 这里maven的打包命令, 其他项目修改为对应的打包命令
         run: |
