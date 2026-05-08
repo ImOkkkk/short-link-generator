@@ -33,12 +33,19 @@
     <druid.version>1.2.8</druid.version>
     <commons.validator.version>1.7</commons.validator.version>
     <jasypt.version>3.0.4</jasypt.version>
+    <lombok.version>1.18.32</lombok.version>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>${lombok.version}</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
